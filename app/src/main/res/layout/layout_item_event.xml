@@ -13,7 +13,7 @@
     android:paddingBottom="@dimen/spacing_small"
     android:background="?card_background">
 
-    <com.thirtydegreesray.openhub.ui.widget.CircleBackgroundImageView
+    <com.github.peonyking.ui.widget.CircleBackgroundImageView
         android:id="@+id/event_icon"
         android:layout_width="28dp"
         android:layout_height="28dp"

@@ -8,7 +8,7 @@
         android:title="@string/choose_theme"
         android:key="appTheme"/>
 
-    <com.thirtydegreesray.openhub.ui.widget.colorChooser.ColorChooserPreference
+    <com.github.peonyking.ui.widget.colorChooser.ColorChooserPreference
         android:icon="@drawable/ic_color_lens"
         android:title="@string/theme_accent_color"
         android:key="accentColor"/>

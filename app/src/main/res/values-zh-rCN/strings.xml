@@ -3,8 +3,13 @@
     <string name="user_name">用户名</string>
     <string name="password">密码</string>
     <string name="login">登录</string>
-    <string name="login_in_browser">在浏览器中登录</string>
-    <string name="oauth_tip">现在我们只支持使用浏览器登录(OAuth)，因为Github将在2020.11.13移除认证API登录。</string>
+    <string name="login_in_browser">浏览器登录</string>
+    <string name="login_with_token">Token 登录</string>
+    <string name="token_input_hint">个人访问令牌</string>
+    <string name="oauth_tip">使用 GitHub 账号登录，即可使用全部功能。</string>
+    <string name="token_login_tip">或者粘贴 GitHub 个人访问令牌直接登录。</string>
+    <string name="token_cannot_empty">令牌不能为空！</string>
+    <string name="auth_error">认证失败，请重试。</string>
     <string name="user_name_warning">用户名不可用！</string>
     <string name="password_warning">密码不可用！</string>
     <string name="profile">主页</string>

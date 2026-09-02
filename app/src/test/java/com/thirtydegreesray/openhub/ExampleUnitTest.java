@@ -1,4 +1,4 @@
-package com.thirtydegreesray.openhub;
+package com.github.peonyking;
 
 import org.junit.Test;
 

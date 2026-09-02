@@ -1,1 +1,8 @@
-include ':app', ':daogenerator'
+include ':app'
+include ':daautolib-annotations'
+include ':daautolib-core'
+include ':daautolib-compiler'
+
+project(':daautolib-annotations').projectDir = new File(rootDir, 'daautolib/annotations')
+project(':daautolib-core').projectDir = new File(rootDir, 'daautolib/core')
+project(':daautolib-compiler').projectDir = new File(rootDir, 'daautolib/compiler')

@@ -13,8 +13,8 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:data="search"
-            android:targetPackage="com.thirtydegreesray.openhub"
-            android:targetClass="com.thirtydegreesray.openhub.ui.activity.BrowserFilterActivity"/>
+            android:targetPackage="com.github.peonyking"
+            android:targetClass="com.github.peonyking.ui.activity.BrowserFilterActivity"/>
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 
@@ -29,8 +29,8 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:data="trending"
-            android:targetPackage="com.thirtydegreesray.openhub"
-            android:targetClass="com.thirtydegreesray.openhub.ui.activity.BrowserFilterActivity"/>
+            android:targetPackage="com.github.peonyking"
+            android:targetClass="com.github.peonyking.ui.activity.BrowserFilterActivity"/>
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 

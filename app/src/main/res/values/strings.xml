@@ -26,8 +26,13 @@
     <string name="user_name">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="login_in_browser">LOGIN WITH BROWSER</string>
-    <string name="oauth_tip">For now we only support OAuth login in browser, Because Github will remove the Authorizations API endpoint on November 13, 2020. </string>
+    <string name="login_in_browser">Login with browser</string>
+    <string name="login_with_token">Login with Token</string>
+    <string name="token_input_hint">Personal access token</string>
+    <string name="oauth_tip">Sign in with your GitHub account to access all features.</string>
+    <string name="token_login_tip">Or paste a GitHub personal access token to sign in directly.</string>
+    <string name="token_cannot_empty">Token cannot be empty!</string>
+    <string name="auth_error">Authentication failed, please try again.</string>
     <string name="user_name_warning">Invalid username!</string>
     <string name="password_warning">Invalid password!</string>
 
@@ -300,7 +305,7 @@
     <string name="no_notifications_tip">No new notifications.</string>
     <string name="feedback_and_share">Share &#038; Feedback</string>
     <string name="share_to_friends">Share to your friends</string>
-    <string name="cookapk_download_url" translatable="false">https://www.coolapk.com/apk/com.thirtydegreesray.openhub</string>
+    <string name="cookapk_download_url" translatable="false">https://www.coolapk.com/apk/com.github.peonyking</string>
     <string name="feedback">Feedback</string>
 
     <string name="openhub_wishes">Wishes From OpenHub</string>

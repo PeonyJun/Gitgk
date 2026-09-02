@@ -4,7 +4,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.thirtydegreesray.openhub.ui.activity.ProfileActivity">
+      tools:context="com.github.peonyking.ui.activity.ProfileActivity">
     <item
         android:id="@+id/action_follow"
         android:title="@string/follow"

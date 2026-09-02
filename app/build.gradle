@@ -1,69 +1,70 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.novoda.build-properties'
-
-buildProperties {
-    getPublic {
-        file rootProject.file('public.properties')
-    }
-    getLocal {
-        file rootProject.file('local.properties')
-    }
-}
 
 android {
+    namespace 'com.github.peonyking'
     compileSdkVersion COMPILE_SDK_VERSION as int
     buildToolsVersion BUILD_TOOLS_VERSION
+    buildFeatures {
+        buildConfig true
+    }
+
     defaultConfig {
-        applicationId "com.thirtydegreesray.openhub"
+        applicationId "com.github.peonyking"
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion TARGET_SDK_VERSION as int
         versionCode VERSION_CODE as int
         versionName VERSION_NAME
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-        multiDexEnabled false
+        multiDexEnabled true
 
-        buildConfigField "String", "OPENHUB_CLIENT_ID", (buildProperties.getLocal['openhub_client_id'] | buildProperties.getPublic['openhub_client_id']).string
-        buildConfigField "String", "OPENHUB_CLIENT_SECRET", (buildProperties.getLocal['openhub_client_secret'] | buildProperties.getPublic['openhub_client_secret']).string
-        buildConfigField "String", "BUGLY_ID", (buildProperties.getLocal['bugly_appid'] | buildProperties.getPublic['bugly_appid']).string
-        buildConfigField "String", "DEBUG_BUGLY_ID", (buildProperties.getLocal['debug_bugly_appid'] | buildProperties.getPublic['debug_bugly_appid']).string
-
-        ndk {
-//            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
-            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-        }
+        buildConfigField "String", "OPENHUB_CLIENT_ID", "\"Ov23li6NLp7oqOQW5oBG\""
+        buildConfigField "String", "OPENHUB_CLIENT_SECRET", "\"0f25ae899fde77b009cd24b58a0aa0a25e7c7a74\""
+        buildConfigField "String", "BUGLY_ID", "\"\""
+        buildConfigField "String", "DEBUG_BUGLY_ID", "\"\""
     }
 
-    signingConfigs  {
-        release {
-            storeFile(file((buildProperties.getLocal['sign_path'] | buildProperties.getPublic['sign_path']).string))
-            storePassword((buildProperties.getLocal['store_password'] | buildProperties.getPublic['store_password']).string)
-            keyAlias((buildProperties.getLocal['key_alias'] | buildProperties.getPublic['key_alias']).string)
-            keyPassword((buildProperties.getLocal['key_password'] | buildProperties.getPublic['key_password']).string)
-        }
+    signingConfigs {
     }
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
         debug {
-            signingConfig signingConfigs.release
         }
     }
 
+    /* 处理 FastJSON 等对 Java 反射的使用 */
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    tasks.withType(JavaCompile).configureEach {
+        options.fork = true
+        options.forkOptions.jvmArgs += [
+                '--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED',
+                '--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED',
+                '--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED',
+                '--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED',
+                '--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED',
+                '--add-exports=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED'
+        ]
+    }
+
     lintOptions {
-        checkReleaseBuilds true
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
         abortOnError false
+        checkReleaseBuilds false
+    }
+
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt',
+                         'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt',
+                         'META-INF/notice.txt', 'META-INF/ASL2.0']
+        }
     }
 
     flavorDimensions "default"
@@ -71,12 +72,10 @@ android {
     productFlavors {
         normal {
             dimension "default"
-            // add app_name int string.xml
             resValue "string", "app_name", "OpenHub"
         }
         fullName {
             dimension "default"
-            // add app_name int string.xml
             resValue "string", "app_name", "OpenHub for GitHub"
         }
     }
@@ -85,56 +84,51 @@ android {
         flavor -> flavor.manifestPlaceholders = [BUGLY_APP_CHANNEL_VALUE: name]
     }
 
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "OpenHub-${variant.productFlavors[0].name}-${variant.buildType.name}-${defaultConfig.versionName}.apk"
+        }
+    }
 }
 
 repositories {
     maven { url "https://jitpack.io" }
     google()
-    flatDir {
-        dirs 'libs' //aar
-    }
+    mavenCentral()
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation 'junit:junit:4.13.2'
 
-//    compile "com.android.support:support-annotations:${ANDROID_SUPPORT_VERSION}"
+    implementation "androidx.appcompat:appcompat:${APPCOMPAT_VERSION}"
+    implementation "androidx.core:core:${CORE_VERSION}"
+    implementation "androidx.recyclerview:recyclerview:${RECYCLERVIEW_VERSION}"
+    implementation "androidx.preference:preference:${PREFERENCE_VERSION}"
+    implementation "androidx.browser:browser:${BROWSER_VERSION}"
+    implementation "androidx.constraintlayout:constraintlayout:${CONSTRAINT_VERSION}"
+    implementation "com.google.android.material:material:${MATERIAL_VERSION}"
+    implementation "androidx.multidex:multidex:${MULTIDEX_VERSION}"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "androidx.viewpager:viewpager:1.0.0"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
-    implementation "com.android.support:support-v4:${ANDROID_SUPPORT_VERSION}"
-//    compile "com.android.support:support-v13:${ANDROID_SUPPORT_VERSION}"
-    implementation "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
-    implementation "com.android.support:recyclerview-v7:${ANDROID_SUPPORT_VERSION}"
-    implementation "com.android.support:design:${ANDROID_SUPPORT_VERSION}"
-    implementation "com.android.support:cardview-v7:${ANDROID_SUPPORT_VERSION}"
-    implementation "com.android.support:support-vector-drawable:${ANDROID_SUPPORT_VERSION}"
-    implementation "com.android.support:preference-v7:${ANDROID_SUPPORT_VERSION}"
-    implementation "com.android.support:preference-v14:${ANDROID_SUPPORT_VERSION}"
-    implementation "com.android.support:customtabs:${ANDROID_SUPPORT_VERSION}"
-
-    implementation "com.android.support.constraint:constraint-layout:${CONSTRAINT_VERSION}"
-//    compile "com.android.support:multidex:${MULTIDEX_VERSION}"
-
-    implementation "com.thirtydegreesray:dataautoaccess:${DATAAUTOACCESS_VERSION}"
-    annotationProcessor "com.thirtydegreesray:dataautoaccess-compiler:${DATAAUTOACCESS_VERSION}"
+    implementation project(':daautolib-core')
+    implementation project(':daautolib-annotations')
+    annotationProcessor project(':daautolib-compiler')
 
     implementation "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTERKNIFE_VERSION}"
 
-    //数据库工具
     implementation "org.greenrobot:greendao:${GREEN_DAO_VERSION}"
-    //事件总线
     implementation "org.greenrobot:eventbus:${EVENT_BUS_VERSION}"
-    //文件下载
 
-    //RxJava
     implementation "io.reactivex:rxjava:${RXJAVA_VERSION}"
-    implementation "io.reactivex:rxandroid:${RXJAVA_VERSION}"
+    implementation "io.reactivex:rxandroid:${RXANDROID_VERSION}"
 
-    //Type-safe HTTP client for Android and Java by Square, Inc.
     implementation "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
     implementation "com.squareup.retrofit2:converter-gson:${RETROFIT_VERSION}"
     implementation "com.squareup.retrofit2:adapter-rxjava:${RETROFIT_VERSION}"
@@ -143,31 +137,26 @@ dependencies {
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'stax', module: 'stax'
     }
+    implementation "com.squareup.okhttp3:okhttp:${OKHTTP_VERSION}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${OKHTTP_VERSION}"
 
-    //dagger依赖注入
     implementation "com.google.dagger:dagger:${DAGGER_VERSION}"
     annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
-
-    implementation "com.tbruyelle.rxpermissions:rxpermissions:${RX_PERMISSION_VERSION}"
 
     implementation "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
     annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
 
-//    compile "com.makeramen:roundedimageview:${ROUNDED_IMAGEVIEW_VERSION}"
     implementation "de.hdodenhof:circleimageview:${CIRCLE_IMAGEVIEW_VERSION}"
-
     implementation "com.github.GrenderG:Toasty:${TOASTY_VERSION}"
     implementation "com.github.daniel-stoneuk:material-about-library:${MATERIAL_ABOUT_VERSION}"
-    implementation "com.unstoppable:submitbutton:${SUBMIT_BUTTON_VERSION}"
 
     implementation "com.afollestad.material-dialogs:core:${MATERIAL_DIALOG_VERSION}"
     implementation "com.afollestad.material-dialogs:commons:${MATERIAL_DIALOG_VERSION}"
 
-    implementation "com.zzhoujay.richtext:richtext:${RICKTEXT_VERSION}"
-    implementation 'com.zzhoujay.glideimagegetter:glideimagegetter:1.0.5'
+    implementation "io.noties.markwon:core:${MARKWON_VERSION}"
+    implementation "io.noties.markwon:image-glide:${MARKWON_VERSION}"
 
     implementation "com.orhanobut:logger:${LOGGER_VERSION}"
     implementation "com.timehop.stickyheadersrecyclerview:library:${STICKY_HEAD_VERSION}"
-
     implementation "org.jsoup:jsoup:${JSOUP_VERSION}"
 }

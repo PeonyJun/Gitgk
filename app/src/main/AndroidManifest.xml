@@ -2,7 +2,7 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.thirtydegreesray.openhub" android:installLocation="auto">
+    android:installLocation="auto">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -26,17 +26,18 @@
         <receiver android:name=".service.CopyBroadcastReceiver"/>
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:name="androidx.core.content.FileProvider.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
         </provider>
 
         <activity
             android:name=".ui.activity.SplashActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -53,6 +54,7 @@
 
         <activity
             android:name=".ui.activity.LoginActivity"
+            android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
@@ -62,12 +64,13 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data
                     android:host="login"
-                    android:scheme="openhub"/>
+                    android:scheme="gk"/>
             </intent-filter>
         </activity>
 
         <activity
             android:name=".ui.activity.BrowserFilterActivity"
+            android:exported="true"
             android:excludeFromRecents="true"
             android:taskAffinity=""
             android:theme="@style/SplashTheme">
