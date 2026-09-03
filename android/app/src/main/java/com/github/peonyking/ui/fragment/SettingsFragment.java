@@ -11,6 +11,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.github.peonyking.R;
 import com.github.peonyking.ui.widget.colorChooser.ColorChooserPreference;
+import com.github.peonyking.util.CrashHandler;
 import com.github.peonyking.util.PrefUtils;
 
 import java.util.Arrays;
@@ -65,6 +66,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
 //        findPreference(PrefUtils.LOGOUT).setOnPreferenceClickListener(this);
         findPreference(PrefUtils.START_PAGE).setOnPreferenceClickListener(this);
         findPreference(PrefUtils.START_PAGE).setSummary(nameList.get(getStartPageIndex()));
+        findPreference(PrefUtils.CRASH_REPORT_VIEW).setOnPreferenceClickListener(this);
         ((ColorChooserPreference) findPreference(PrefUtils.ACCENT_COLOR))
                 .setColorChooserCallback(this);
     }
@@ -88,6 +90,9 @@ public class SettingsFragment extends PreferenceFragmentCompat
                 return true;
             case PrefUtils.START_PAGE:
                 showChooseStartPageDialog();
+                return true;
+            case PrefUtils.CRASH_REPORT_VIEW:
+                CrashHandler.showLatestReportDialog(getActivity());
                 return true;
         }
         return false;

@@ -40,6 +40,7 @@ import com.github.peonyking.ui.fragment.TopicsFragment;
 import com.github.peonyking.ui.fragment.TraceFragment;
 import com.github.peonyking.ui.fragment.base.BaseFragment;
 import com.github.peonyking.ui.widget.NewYearWishesDialog;
+import com.github.peonyking.util.CrashHandler;
 import com.github.peonyking.util.PrefUtils;
 import com.github.peonyking.util.StringUtils;
 
@@ -182,6 +183,7 @@ public class MainActivity extends BaseDrawerActivity<MainPresenter>
         mail.setText(StringUtils.isBlank(loginUser.getBio()) ? joinTime : loginUser.getBio());
 
         tabLayout.setVisibility(View.GONE);
+        CrashHandler.checkAndShowPendingReport(getActivity());
     }
 
     @Override

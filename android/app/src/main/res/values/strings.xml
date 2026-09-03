@@ -482,4 +482,15 @@
     <string name="add_account">Add account</string>
     <string name="delete_label_warning">Confirm to delete this label?</string>
 
+    <!-- crash debugger -->
+    <string name="crash_report">Crash report</string>
+    <string name="crash_report_desc">Record crash logs and show them when the app is opened again</string>
+    <string name="view_crash_report">View crash report</string>
+    <string name="view_crash_report_desc">Tap to see the newest crash log, long press the text to copy</string>
+    <string name="crash_report_dialog_title">Crash log</string>
+    <string name="crash_report_empty">No crash log</string>
+    <string name="crash_report_cleared">Crash log cleared</string>
+    <string name="crash_copy_all">Copy all</string>
+    <string name="crash_clear">Clear</string>
+
 </resources>

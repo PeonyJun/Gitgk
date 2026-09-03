@@ -14,6 +14,7 @@ import com.github.peonyking.mvp.model.BasicToken;
 import com.github.peonyking.mvp.presenter.LoginPresenter;
 import com.github.peonyking.ui.activity.base.BaseActivity;
 import com.github.peonyking.util.AppOpener;
+import com.github.peonyking.util.CrashHandler;
 import com.github.peonyking.util.StringUtils;
 
 import butterknife.BindView;
@@ -77,6 +78,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter>
     @Override
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
+        CrashHandler.checkAndShowPendingReport(getActivity());
     }
 
     @OnClick(R.id.login_bn)

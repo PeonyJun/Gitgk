@@ -18,6 +18,7 @@ import com.github.peonyking.inject.component.DaggerAppComponent;
 import com.github.peonyking.inject.module.AppModule;
 import com.github.peonyking.service.NetBroadcastReceiver;
 import com.github.peonyking.util.AppUtils;
+import com.github.peonyking.util.CrashHandler;
 import com.github.peonyking.util.NetHelper;
 
 /**
@@ -41,6 +42,7 @@ public class AppApplication extends Application {
     public void onCreate() {
         super.onCreate();
         application = this;
+        CrashHandler.init(this);
         //init application
         long startTime = System.currentTimeMillis();
         AppData.INSTANCE.getSystemDefaultLocal();

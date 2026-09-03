@@ -45,6 +45,19 @@
         android:key="disableLoadingImage"
         android:defaultValue="false"/>
 
+    <SwitchPreference
+        android:icon="@drawable/ic_error"
+        android:title="@string/crash_report"
+        android:summary="@string/crash_report_desc"
+        android:key="crashReportEnable"
+        android:defaultValue="true"/>
+
+    <Preference
+        android:icon="@drawable/ic_feedback"
+        android:title="@string/view_crash_report"
+        android:summary="@string/view_crash_report_desc"
+        android:key="crashReportView"/>
+
     <Preference
         android:icon="@drawable/ic_language"
         android:title="@string/language"

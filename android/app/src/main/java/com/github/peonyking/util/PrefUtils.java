@@ -55,6 +55,9 @@ public class PrefUtils {
     public final static String LOGOUT = "logout";
     public final static String CODE_WRAP = "codeWrap";
     public final static String CUSTOM_TABS_ENABLE = "customTabsEnable";
+    public final static String CRASH_REPORT_ENABLE = "crashReportEnable";
+    public final static String CRASH_REPORT_LAST_READ = "crashReportLastRead";
+    public final static String CRASH_REPORT_VIEW = "crashReportView";
 
 
     public final static String POP_TIMES = "popTimes";
@@ -175,6 +178,14 @@ public class PrefUtils {
 
     public static boolean isCustomTabsEnable(){
         return getDefaultSp(AppApplication.get()).getBoolean(CUSTOM_TABS_ENABLE, true);
+    }
+
+    public static boolean isCrashReportEnable(){
+        return getDefaultSp(AppApplication.get()).getBoolean(CRASH_REPORT_ENABLE, true);
+    }
+
+    public static String getLastReadCrashReport(){
+        return getDefaultSp(AppApplication.get()).getString(CRASH_REPORT_LAST_READ, null);
     }
 
     public static String getSearchRecords(){

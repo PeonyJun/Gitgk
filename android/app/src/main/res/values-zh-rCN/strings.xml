@@ -381,4 +381,15 @@
     <string name="add_account">添加账户</string>
     <string name="delete_label_warning">确认要删除这个标签？</string>
 
+    <!-- 崩溃调试 -->
+    <string name="crash_report">崩溃调试</string>
+    <string name="crash_report_desc">记录崩溃日志，下次打开应用时显示，便于定位问题</string>
+    <string name="view_crash_report">查看崩溃日志</string>
+    <string name="view_crash_report_desc">点击查看最近一次崩溃详情，长按文字可复制</string>
+    <string name="crash_report_dialog_title">崩溃日志</string>
+    <string name="crash_report_empty">暂无崩溃日志</string>
+    <string name="crash_report_cleared">崩溃日志已清除</string>
+    <string name="crash_copy_all">复制全部</string>
+    <string name="crash_clear">清除</string>
+
 </resources>
