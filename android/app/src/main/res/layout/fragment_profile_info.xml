@@ -251,7 +251,7 @@
                     android:layout_marginBottom="@dimen/spacing_mini"
                     android:layout_marginStart="@dimen/spacing_normal"/>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/orgs_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
