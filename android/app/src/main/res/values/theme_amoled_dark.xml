@@ -18,7 +18,7 @@
     <color name="amoled_dark_subtitle_color">@color/material_grey_500</color>
     <color name="amoled_dark_selected_color">#3f3f3f</color>
 
-    <style name="ThemeAmoledDark" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="ThemeAmoledDark" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/amoled_dark_color_primary</item>
         <item name="colorPrimaryDark">@color/amoled_dark_color_primary_dark</item>
         <item name="colorAccent">@color/amoled_dark_color_accent</item>
@@ -37,10 +37,10 @@
         <item name="popup_theme">@style/PopupThemeDark</item>
         <item name="appbar_theme">@style/AppbarThemeDark</item>
         <item name="android:contextPopupMenuStyle" tools:targetApi="n">@style/ContextPopupThemeDark</item>
-        <item name="popup_menu_theme">@style/PopupMenuDark</item>
+        <item name="popup_menu_theme">@style/PopupMenuAmoledDark</item>
     </style>
 
-    <style name="DialogThemeAmoledDark" parent="Theme.AppCompat.Dialog.Alert">
+    <style name="DialogThemeAmoledDark" parent="Theme.MaterialComponents.Dialog.Alert">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="icon_color">@color/amoled_dark_icon_color</item>
@@ -50,9 +50,9 @@
         <item name="android:windowBackground">@color/amoled_dark_color_window_background</item>
     </style>
 
-    <style name="AppbarThemeAmoledDark" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-    </style>
+    <style name="AppbarThemeAmoledDark" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
+    </style>
 
     <style name="PopupMenuAmoledDark" parent="Widget.AppCompat.PopupMenu">
         <item name="android:popupBackground">@color/amoled_dark_color_window_background</item>
@@ -62,7 +62,7 @@
         <item name="android:colorBackground">@color/amoled_dark_color_window_background</item>
     </style>
 
-    <style name="ContextPopupThemeAmoledDark" parent="PopupThemeDark">
+    <style name="ContextPopupThemeAmoledDark" parent="PopupThemeAmoledDark">
         <item name="android:popupBackground">@color/amoled_dark_color_window_background</item>
         <!--
          ~  Context menu of a RecyclerView is displayed in the wrong location when setting
